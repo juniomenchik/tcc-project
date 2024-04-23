@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: aincrad
+  name: spring-boot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot
+  template:
+    metadata:
+      labels:
+        app: spring-boot
+    spec:
+      containers:
+        - name: spring-boot
+          image: juniomenchik/spring-boot:0.0.1
+          imagePullPolicy: Always
+#          envFrom:
+#            - configMapRef:
+#                name: spring-boot-envs
+#            - secretRef:
+#                name: spring-boot-envs
+          ports:
+            - name: http-port
+              containerPort: 8080
+              protocol: TCP
+#          lifecycle:
+#            preStop:
+#              exec:
+#                command: [ "sh", "-c", "sleep 10" ]
+#          readinessProbe:
+#            httpGet:
+#              path: /actuator/health/readiness
+#              port: http-port
+#            initialDelaySeconds: 240
+#            periodSeconds: 30
+#            timeoutSeconds: 5
+#            failureThreshold: 5
+#          livenessProbe:
+#            httpGet:
+#              path: /actuator/health/liveness
+#              port: http-port
+#            initialDelaySeconds: 60
+#            periodSeconds: 30
+#            timeoutSeconds: 5
+#            failureThreshold: 3

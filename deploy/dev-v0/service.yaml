@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: aincrad
+  name: spring-boot
+  labels:
+    app: spring-boot
+spec:
+  selector:
+    app: spring-boot
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: aincrad
+  name: spring-boot
+data:
+  newrelic.environment: 'dev-ka'
+  environment.datacenter: 'kayaba'
