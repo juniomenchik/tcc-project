@@ -17,15 +17,6 @@
 		<java.version>17</java.version>
 	</properties>
 
-	<distributionManagement>
-		<repository>
-			<uniqueVersion>false</uniqueVersion>
-			<id>maven-release</id>
-			<name>maven-release</name>
-			<url>http://localhost:8081/repository/maven-release/</url>
-		</repository>
-	</distributionManagement>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
