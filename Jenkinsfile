@@ -16,5 +16,10 @@ pipeline {
                 }
             }
         }
+        stage('Deploy Development') {
+            steps {
+                sh 'mvn spring-boot:run'
+            }
+        }
     }
 }
