@@ -4,17 +4,17 @@ pipeline {
 	stages {
         stage('Build') {
             steps {
-                sh './mvnw -B -DskipTests clean package'
+                sh 'chmod +x ./mvnw -B -DskipTests clean package'
             }
         }
 		stage('Test'){
 			steps{
-				sh './mvnw test'
+				sh 'chmod +x ./mvnw test'
 			}
 		}
 		stage('Deploy') {
 			steps {
-			     sh './mvnw jar:jar deploy:deploy'
+			     sh 'chmod +x ./mvnw jar:jar deploy:deploy'
 			}
 		}
 	}
