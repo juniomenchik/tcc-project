@@ -17,3 +17,6 @@ spring:
     show-sql: true
 springdoc:
   show-actuator: true
+
+
+#localhost:8080/swagger-ui/index.html
