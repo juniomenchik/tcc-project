@@ -13,7 +13,6 @@ pipeline {
         }
         stage('Deploy Development') {
             steps {
-                sh 'docker container rm spring-boot'
                 sh 'mvn clean package -DskipTests'
                 sh 'docker build -t spring-boot:0.0.1 .'
                 sh 'docker run -p 8080:8080 spring-boot:0.0.1'
