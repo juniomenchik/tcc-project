@@ -6,12 +6,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.Optional;
 
 @Data
 @Entity
@@ -28,26 +29,16 @@ public class Employee {
     private BigDecimal salary;
 
     public static Employee buildByEmployeeDTO(EmployeeDTO employeeDTO) {
-        try {
-            if ( !Objects.isNull(employeeDTO.getLevel())){
-                DeveloperLevelEnum.valueOf(employeeDTO.getLevel());
-            }
-        }catch (Exception exception){
-            throw new IllegalArgumentException("Invalid developer level");
-        }
-
-        var level = DeveloperLevelEnum.valueOf(employeeDTO.getLevel());
-
         return Employee.builder()
                 .name(employeeDTO.getName())
                 .designation(employeeDTO.getDesignation())
                 .level(employeeDTO.getLevel() != null
-                        ? level
+                        ? DeveloperLevelEnum.valueOf(employeeDTO.getLevel())
                         : DeveloperLevelEnum.TRAINEE)
                 .salary(employeeDTO.getSalary() != null
                         ? employeeDTO.getSalary()
-                        : level.getSalary())
-                .build();
+                        : DeveloperLevelEnum.TRAINEE.getSalary()
+                ).build();
     }
 
     public void upLevel() {

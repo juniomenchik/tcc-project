@@ -18,6 +18,13 @@ public class EmployeeDTO {
     private String level;
     private BigDecimal salary;
 
+    public EmployeeDTO(Employee employee) {
+        this.name = employee.getName();
+        this.designation = employee.getDesignation();
+        this.level = String.valueOf(employee.getLevel());
+        this.salary = employee.getSalary();
+    }
+
     public static EmployeeDTO buildByEmployee(Employee employee) {
         return EmployeeDTO.builder()
                 .name(employee.getName())
