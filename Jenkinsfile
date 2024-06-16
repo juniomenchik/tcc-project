@@ -31,17 +31,15 @@ pipeline {
             }
         }
         stage('Check Availability') {
-          steps {
-              sleep 20
-              waitUntil {
-                  try {
-                      sh "curl -s --head  --request GET  localhost:8000/actuator/health | grep '200'"
-                      return true
-                  } catch (Exception e) {
-                        return false
-                  }
-              }
-           }
+            steps {
+                sleep 20
+                waitUntil {
+                    script {
+                        def response = sh(script: "curl -s --head  --request GET  localhost:8000/actuator/health | grep '200'", returnStdout: true).trim()
+                        return response == '200'
+                    }
+                }
+            }
         }
     }
 }
