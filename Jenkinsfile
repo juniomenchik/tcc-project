@@ -37,6 +37,7 @@ pipeline {
                     def response = ''
                     for (int i = 0; i < 10; i++) {
                         response = sh(script: "curl -s --head  --request GET  localhost:8000/actuator/health | grep '200'", returnStdout: true).trim()
+                        echo "Response is: ${response}"
                         if (response == '200') break
                         sleep 5
                     }
