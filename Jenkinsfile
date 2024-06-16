@@ -32,14 +32,13 @@ pipeline {
         }
         stage('Check Availability') {
             steps {
-                timeout(time: 15, unit: 'SECONDS') {
-                    waitUntil {
-                        try {
-                            sh "curl -s --head --request GET localhost:8000/actuator/health | grep '200'"
-                            return true
-                        } catch (Exception e) {
-                            return false
-                        }
+                sleep 20
+                script {
+                    def response = ''
+                    for (int i = 0; i < 10; i++) {
+                        response = sh(script: "curl -s --head  --request GET  localhost:8000/actuator/health | grep '200'", returnStdout: true).trim()
+                        if (response == '200') break
+                        sleep 5
                     }
                 }
             }
