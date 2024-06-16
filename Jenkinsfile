@@ -30,18 +30,17 @@ pipeline {
                 sh 'docker run -d --name spring-boot -p 8000:8000 spring-boot:0.0.1'
             }
         }
-        timeout(time: 15, unit: 'SECONDS') {
         stage('Check Availability') {
-              steps {
-                  waitUntil {
-                      try {
-                          sh "curl -s --head  --request GET  localhost:8000/actuator/health | grep '200'"
-                          return true
-                      } catch (Exception e) {
-                            return false
-                      }
+          steps {
+              sleep 20
+              waitUntil {
+                  try {
+                      sh "curl -s --head  --request GET  localhost:8000/actuator/health | grep '200'"
+                      return true
+                  } catch (Exception e) {
+                        return false
                   }
-               }
+              }
            }
         }
     }
