@@ -36,9 +36,9 @@ pipeline {
                 script {
                     def response = ''
                     for (int i = 0; i < 10; i++) {
-                        response = sh(script: "curl -s --head  --request GET  localhost:8000/actuator/health | grep '200'", returnStdout: true).trim()
+                        response = sh(script: "curl -s --head  --request GET  localhost:8000/actuator/health", returnStdout: true).trim()
                         echo "Response is: ${response}"
-                        if (response == '200') break
+                        if (response.contains('200')) break
                         sleep 5
                     }
                 }
