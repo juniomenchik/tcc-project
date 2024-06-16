@@ -32,19 +32,13 @@ pipeline {
         }
         stage('Check Availability') {
             steps {
-                sleep 20
-                script {
-                    for (int i = 0; i < 5; i++) {
-                        def response = sh(script: "curl -s --head --request GET localhost:8000/actuator/health | grep HTTP | awk '{ print $2 }'", returnStdout: true).trim()
-                        if (response == '200') {
-                            println('Server is up and running');
-                            break;
-                        } else {
-                            if (i < 4) {
-                                sleep 5; // wait for 5 seconds before the next attempt
-                            } else {
-                                error('Server is not running');
-                            }
+                timeout(time: 15, unit: 'SECONDS') {
+                    waitUntil {
+                        try {
+                            sh "curl -s --head --request GET localhost:8000/actuator/health | grep '200'"
+                            return true
+                        } catch (Exception e) {
+                            return false
                         }
                     }
                 }
