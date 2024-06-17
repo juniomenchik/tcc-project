@@ -44,5 +44,11 @@ pipeline {
                 }
             }
         }
+        stage('Slack Notification') {
+            steps {
+                echo 'log de sucesso'
+            }
+        }
+
     }
 }
