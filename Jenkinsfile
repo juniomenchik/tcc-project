@@ -46,7 +46,7 @@ pipeline {
         }
         stage('Slack Notification') {
             steps {
-                echo 'log de sucesso'
+                echo 'DEV UP'
             }
         }
 
